@@ -6,7 +6,7 @@ import path from 'path'
 export default defineConfig(({ command }) => {
   const isProduction = command === 'build';
   // Use BASE_URL from environment if set, otherwise fallback to template-example
-  const baseUrl = process.env.BASE_URL || '/template-example/';
+  const baseUrl = process.env.BASE_URL || '/Ho-Hyeon-toybox/';
   
   return {
     // Use base path only in production (GitHub Pages)
