@@ -71,7 +71,22 @@ export function loadArtifacts(): Artifact[] {
         updatedAt: new Date().toISOString()
       };
     } else {
-      metadata = importedModule.metadata;
+      const rawMeta = importedModule.metadata as Record<string, unknown>;
+
+      // Handle various date field names: dateCreated, date, createdAt
+      const createdAt = (rawMeta.createdAt || rawMeta.dateCreated || rawMeta.date || new Date().toISOString()) as string;
+      // updatedAt falls back to createdAt if not present
+      const updatedAt = (rawMeta.updatedAt || createdAt) as string;
+
+      metadata = {
+        title: rawMeta.title as string,
+        description: rawMeta.description as string | undefined,
+        type: rawMeta.type as 'react' | 'svg' | 'mermaid',
+        tags: (rawMeta.tags || []) as string[],
+        folder: rawMeta.folder as string | undefined,
+        createdAt,
+        updatedAt,
+      };
     }
 
     artifacts.push({
