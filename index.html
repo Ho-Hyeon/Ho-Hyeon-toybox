@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/Ho-Hyeon-toybox/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOYBOX - Ho-Hyeon</title>
+    <script>
+      // Check if we have a redirect stored from 404.html
+      (function () {
+        const redirect = sessionStorage.getItem("redirect");
+        if (redirect && redirect !== "/") {
+          // Clear the redirect
+          sessionStorage.removeItem("redirect");
+
+          // Determine base URL for GitHub Pages
+          const isProduction = window.location.hostname.includes("github.io");
+          const baseUrl = isProduction ? "/Ho-Hyeon-toybox/" : "/";
+
+          // Push the path to history for React Router to handle
+          const cleanRedirect = redirect.startsWith(baseUrl)
+            ? redirect
+            : baseUrl + redirect.replace(/^\//, "");
+
+          console.log("Redirecting to:", cleanRedirect);
+          window.history.pushState(null, null, cleanRedirect);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/Ho-Hyeon-toybox/assets/index-DmiNdObp.js"></script>
+    <link rel="modulepreload" crossorigin href="/Ho-Hyeon-toybox/assets/react-vendor-5CBp1Iyx.js">
+    <link rel="modulepreload" crossorigin href="/Ho-Hyeon-toybox/assets/ui-vendor-BiIGzPeh.js">
+    <link rel="modulepreload" crossorigin href="/Ho-Hyeon-toybox/assets/mermaid-vendor-BnldNDpP.js">
+    <link rel="stylesheet" crossorigin href="/Ho-Hyeon-toybox/assets/index-CrAoXrze.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
